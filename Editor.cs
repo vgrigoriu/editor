@@ -82,6 +82,13 @@ namespace editor
                 return;
             }
 
+            if (c.Key == ConsoleKey.Backspace)
+            {
+                buffer = buffer.DeleteBack(this.cursor.Row, this.cursor.Col);
+                cursor = cursor.MoveLeft(buffer);
+                return;
+            }
+
             // in all other cases, insert into the current position
             buffer = buffer.Insert(c.KeyChar, this.cursor.Row, this.cursor.Col);
             cursor = cursor.MoveRight(buffer);

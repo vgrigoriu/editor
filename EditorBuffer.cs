@@ -31,5 +31,18 @@ namespace editor
             var newLines = this.lines.RemoveAt(row).InsertRange(row, splitLines);
             return new EditorBuffer(newLines);
         }
+
+        internal EditorBuffer DeleteBack(int row, int col)
+        {
+            if (col == 0)
+            {
+                // we're at the start of line, should delete the previous \n
+                // but right now we just do nothing
+                return this;
+            }
+            var newLine = this.lines[row].Remove(col - 1, 1);
+            var newLines = this.lines.SetItem(row, newLine);
+            return new EditorBuffer(newLines);
+        }
     }
 }
