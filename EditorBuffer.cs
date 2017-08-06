@@ -4,19 +4,15 @@ namespace editor
 {
     public class EditorBuffer
     {
-        private List<string> lines;
+        private readonly List<string> lines;
 
-        public EditorBuffer()
+        public EditorBuffer(List<string> lines)
         {
-            this.lines = new List<string>
-            {
-                "One line",
-                "Two lines",
-                "",
-                "Last line, maybe"
-            };
+            this.lines = lines;
         }
 
-        public IEnumerable<string> Lines => this.lines;
+        public IReadOnlyList<string> Lines => this.lines;
+
+        public int LinesCount => this.lines.Count;
     }
 }
