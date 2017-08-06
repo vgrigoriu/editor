@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace editor
 {
@@ -17,7 +18,7 @@ namespace editor
                 "Two lines",
                 "",
                 "Last line, maybe"
-            });
+            }.ToImmutableList());
 
             this.cursor = new Cursor(0, 0);
         }
@@ -53,22 +54,30 @@ namespace editor
             if (c.Key == ConsoleKey.RightArrow)
             {
                 cursor = cursor.MoveRight(buffer);
+                return;
             }
 
             if (c.Key == ConsoleKey.LeftArrow)
             {
                 cursor = cursor.MoveLeft(buffer);
+                return;
             }
 
             if (c.Key == ConsoleKey.UpArrow)
             {
                 cursor = cursor.MoveUp(buffer);
+                return;
             }
 
             if (c.Key == ConsoleKey.DownArrow)
             {
                 cursor = cursor.MoveDown(buffer);
+                return;
             }
+
+            // in all other cases, insert into the current position
+            buffer = buffer.Insert(c.KeyChar, this.cursor.Row, this.cursor.Col);
+            cursor = cursor.MoveRight(buffer);
         }
     }
 }
