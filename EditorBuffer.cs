@@ -23,5 +23,13 @@ namespace editor
             var newLines = this.lines.SetItem(row, newLine);
             return new EditorBuffer(newLines);
         }
+
+        internal EditorBuffer InsertNewLine(int row, int col)
+        {
+            var line = this.lines[row];
+            var splitLines = new[]{ line.Substring(0, col), line.Substring(col) };
+            var newLines = this.lines.RemoveAt(row).InsertRange(row, splitLines);
+            return new EditorBuffer(newLines);
+        }
     }
 }

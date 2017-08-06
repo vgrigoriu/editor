@@ -46,6 +46,11 @@ namespace editor
 
             return new Cursor(row, col);
         }
+
+        internal Cursor MoveToBeginningOfLine(EditorBuffer buffer)
+        {
+            return new Cursor(row, 0);
+        }
     }
 
     public static class Int32Extensions

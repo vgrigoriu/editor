@@ -75,6 +75,13 @@ namespace editor
                 return;
             }
 
+            if (c.Key == ConsoleKey.Enter)
+            {
+                buffer = buffer.InsertNewLine(this.cursor.Row, this.cursor.Col);
+                cursor = cursor.MoveDown(buffer).MoveToBeginningOfLine(buffer);
+                return;
+            }
+
             // in all other cases, insert into the current position
             buffer = buffer.Insert(c.KeyChar, this.cursor.Row, this.cursor.Col);
             cursor = cursor.MoveRight(buffer);
